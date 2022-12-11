@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
@@ -37,10 +39,14 @@ class _HomePageState extends State<HomePage> {
         valueListenable: box.listenable(),
         builder: (context, value, child) {
           return ListView.builder(
-            itemCount: box.length,
+            itemCount: 30,
             itemBuilder: (context, index) {
               return ElevatedButton(
                   onPressed: () {
+                    context
+                        .read<DetailsProvider>()
+                        .add(Details(id: const Uuid().v4(), name: ''));
+                    log('index: $index');
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -48,16 +54,14 @@ class _HomePageState extends State<HomePage> {
                               ShowPage(getdetails: provider.getDetail(index)),
                         ));
                   },
-                  child: Text('${(index + 1).toString()}'));
+                  child: Text((index + 1).toString()));
             },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context
-              .read<DetailsProvider>()
-              .add(Details(id: const Uuid().v4(), name: ''));
+          box.clear();
         },
         child: const Icon(Icons.add),
       ),
