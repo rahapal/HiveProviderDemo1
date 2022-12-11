@@ -17,8 +17,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String? id;
-  String? name;
+  late String id;
+  late String name;
 
   late Box<Details> box;
 
@@ -43,9 +43,8 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context, index) {
               return ElevatedButton(
                   onPressed: () {
-                    context
-                        .read<DetailsProvider>()
-                        .add(Details(id: const Uuid().v4(), name: ''));
+                    context.read<DetailsProvider>().add(
+                        Details(id: const Uuid().v4(), name: name.toString()));
                     log('index: $index');
                     Navigator.push(
                         context,

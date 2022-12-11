@@ -13,8 +13,13 @@ class _ShowPageState extends State<ShowPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Show Page')),
-      body: Center(
-        child: Text(widget.getdetails.id),
+      body: Column(
+        children: [
+          Text(widget.getdetails.id),
+          Icon(widget.getdetails.name == null
+              ? Icons.ac_unit
+              : Icons.access_alarm),
+        ],
       ),
     );
   }
